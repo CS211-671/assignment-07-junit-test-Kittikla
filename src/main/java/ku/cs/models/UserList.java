@@ -32,7 +32,7 @@ public class UserList {
     {
         User exist = findUserByUsername(username);
         if (exist != null) {
-            if(!newPassword.equals(oldPassword))
+            if(!newPassword.equals(oldPassword) && exist.validatePassword(oldPassword))
             {
                 exist.setPassword(newPassword);
             }
@@ -45,9 +45,9 @@ public class UserList {
     //TODO: return User object if username and password is correct, otherwise return null
     public User login(String username, String password) {
         User exist = findUserByUsername(username);
-        if (exist != null && exist.getPassword() != null)
+        if (exist != null && password != null)
         {
-            if(password.equals(exist.getPassword()))
+            if(exist.validatePassword(password))
             {
                 return exist;
             }
